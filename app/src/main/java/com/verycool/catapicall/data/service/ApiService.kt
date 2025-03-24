@@ -9,8 +9,9 @@ interface ApiService {
 
     @GET(PATH)
     suspend fun getCats(
-        @Query(HAS_BREEDS) hasBreeds:Int,
-        @Query(LIMIT_Q) limit : Int
+        @Query(LIMIT_Q) limit : Int,
+        @Query(HAS_BREEDS) hasBreeds:Int
+
     ) : Response<List<CatsDetailsItemModel>>
 
 }

@@ -1,8 +1,7 @@
 package com.verycool.catapicall.domain
 
 sealed class UiState<out T> {
-
-    data object LOADING : UiState<Nothing>()
+    object LOADING : UiState<Nothing>()
 
     data class SUCCESS<T>(val response : T) : UiState<T>()
 

@@ -18,8 +18,12 @@ class CatsViewModel @Inject constructor(
     private val dispatcher: CoroutineDispatcher
 ) : ViewModel(){
 
-    private val _catsState : MutableStateFlow<UiState<List<CatsDetailsItemModel>>> = MutableStateFlow(UiState.LOADING)
+    private val _catsState  = MutableStateFlow<UiState<List<CatsDetailsItemModel>>>(UiState.LOADING)
     val catsState = _catsState.asStateFlow()
+
+    init {
+        retrieveCats()
+    }
 
     fun retrieveCats(
         limit: Int = 10,
