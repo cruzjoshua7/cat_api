@@ -11,7 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.verycool.catapicall.ui.screens.CatsScreen
 import com.verycool.catapicall.ui.theme.CatApiCallTheme
+import com.verycool.catapicall.viewmodel.CatsViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +23,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             CatApiCallTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    val viewModel = hiltViewModel<CatsViewModel>()
+                    viewModel.retrieveCats()
+
+                    CatsScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        viewModel = viewModel
                     )
                 }
             }
@@ -30,18 +36,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     CatApiCallTheme {
-        Greeting("Android")
+
     }
 }
